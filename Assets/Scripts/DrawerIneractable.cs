@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class DrawerIneractable : XRGrabInteractable
 {
     [SerializeField] XRSocketInteractor keySocket;
+    [SerializeField] GameObject keyIndicatorLight;
     [SerializeField] bool isLocked;
     [SerializeField] Transform drawerTransform;
     [SerializeField] private Vector3 limitDistances = new Vector3(.02f, .02f, 0f);
@@ -42,6 +43,10 @@ public class DrawerIneractable : XRGrabInteractable
     private void OnDrawerUnlocked (SelectEnterEventArgs arg0)
     {
         isLocked = false;
+        if (keyIndicatorLight != null)
+        {
+            keyIndicatorLight.SetActive(false);
+        }
         Debug.Log("***** DRAWER UNLOCKED *****");
     }
 
