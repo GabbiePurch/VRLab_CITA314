@@ -6,9 +6,18 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class SimpleHingeInteractable : XRSimpleInteractable
 {
     private Transform grabHand;
+    [SerializeField] bool isLocked;
     void Start()
     {
         
+    }
+    public void LockHinge()
+    {
+        isLocked = true;
+    }
+    public void UnlockHinge()
+    {
+        isLocked = false;
     }
 
     protected virtual void Update()
@@ -21,8 +30,11 @@ public class SimpleHingeInteractable : XRSimpleInteractable
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        base.OnSelectEntered(args);
-        grabHand = args.interactableObject.transform;
+        if (!isLocked)
+        {
+            base.OnSelectEntered(args);
+            grabHand = args.interactableObject.transform;
+        }
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
