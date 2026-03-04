@@ -6875,6 +6875,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+  positionLimits: {x: 0, y: 0, z: 0}
   isLocked: 0
 --- !u!23 &384586128
 MeshRenderer:
@@ -38454,7 +38455,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2155272316054280550
 Transform:
   m_ObjectHideFlags: 0
@@ -38579,7 +38580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &2335982213154777681
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -39512,7 +39513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &3710788205364800726
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -42273,6 +42274,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+  positionLimits: {x: 0.15, y: 0.03, z: 0.15}
   isLocked: 1
   comboLock: {fileID: 52988886}
   rotationLimits: {x: 15, y: 0, z: 0}
@@ -42764,7 +42766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &7529789953698975033
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -43618,6 +43620,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+  positionLimits: {x: 0.15, y: 0.03, z: 0.15}
   isLocked: 1
   comboLock: {fileID: 52988886}
   rotationLimits: {x: 15, y: 0, z: 0}

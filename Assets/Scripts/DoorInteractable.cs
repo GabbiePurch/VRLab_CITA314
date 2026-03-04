@@ -10,8 +10,9 @@ public class DoorInteractable : SimpleHingeInteractable
     [SerializeField] Transform doorObject;
     private Transform startRotation;
     private float startAngleX;
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         startRotation = transform;
         startAngleX = startRotation.localEulerAngles.x;
 
