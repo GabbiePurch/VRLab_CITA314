@@ -6,9 +6,21 @@ using UnityEngine;
 public class DoorInteractable : SimpleHingeInteractable
 {
     [SerializeField] CombinationLock comboLock;
+    [SerializeField] Vector3 rotationLimits;
     [SerializeField] Transform doorObject;
+    private Transform startRotation;
+    private float startAngleX;
     void Start()
     {
+        startRotation = transform;
+        startAngleX = startRotation.localEulerAngles.x;
+
+        if (startAngleX >= 180)
+        {
+            startAngleX -= 360;    
+        }
+
+
         if (comboLock != null)
         {
             comboLock.UnlockAction += OnUnlocked;
@@ -36,6 +48,35 @@ public class DoorInteractable : SimpleHingeInteractable
                 doorObject.localEulerAngles.y,
                 doorObject.localEulerAngles.z
             );
+        }
+
+        if (isSelected)
+        {
+            CheckLimits();
+        }
+    }
+
+    private void CheckLimits()
+    {
+         float localAngleX = transform.localEulerAngles.x;
+
+        if (localAngleX >= 180)
+        {
+            localAngleX -= 360;
+        }
+
+        if (localAngleX >= startAngleX + rotationLimits.x  ||
+            localAngleX <= startAngleX - rotationLimits.x)
+        {
+            ReleaseHinge();
+
+            transform.localEulerAngles = new Vector3
+            (
+                startAngleX,
+                transform.localEulerAngles.y,
+                transform.localEulerAngles.z
+            );
+
         }
     }
 }
