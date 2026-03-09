@@ -37,7 +37,8 @@ public class CombinationLock : MonoBehaviour
     void Start()
     {
         maxButtonPresses = comboValues.Length;
-        ResetUserValues();
+        inputValues = new int[comboValues.Length];
+        userInputText.text = "";
 
         for (int i = 0; i < comboButtons.Length; i++)
         {

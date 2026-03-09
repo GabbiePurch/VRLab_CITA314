@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
 
-public class SimpleHingeInteractable : XRSimpleInteractable
+public abstract class SimpleHingeInteractable : XRSimpleInteractable
 {
     [SerializeField] Vector3 positionLimits;
     private Transform grabHand;
@@ -41,7 +41,7 @@ public class SimpleHingeInteractable : XRSimpleInteractable
         if (!isLocked)
         {
             base.OnSelectEntered(args);
-            grabHand = args.interactableObject.transform;
+            grabHand = args.interactorObject.transform;
         }
     }
 
@@ -50,6 +50,7 @@ public class SimpleHingeInteractable : XRSimpleInteractable
         base.OnSelectExited(args);
         grabHand = null;
         ChangeLayerMask(Grab_Layer);
+        ResetHinge();
     }
 
     private void TrackHand()
@@ -58,21 +59,21 @@ public class SimpleHingeInteractable : XRSimpleInteractable
         hingePositions = hingeCollider.bounds.center;
 
         if (grabHand.position.x >= hingePositions.x + positionLimits.x ||
-            grabHand.position.x <= hingePositions.x + positionLimits.x)
+            grabHand.position.x <= hingePositions.x - positionLimits.x)
         {
             ReleaseHinge();
             Debug.Log("***** RELEASE HINGE X *****");
         }
 
         else if (grabHand.position.y >= hingePositions.y + positionLimits.y ||
-            grabHand.position.y <= hingePositions.y + positionLimits.y)
+            grabHand.position.y <= hingePositions.y - positionLimits.y)
         {
             ReleaseHinge();
             Debug.Log("***** RELEASE HINGE Y *****");
         }
 
         else if (grabHand.position.z >= hingePositions.z + positionLimits.z ||
-            grabHand.position.z <= hingePositions.z + positionLimits.z)
+            grabHand.position.z <= hingePositions.z - positionLimits.z)
         {
             ReleaseHinge();
             Debug.Log("***** RELEASE HINGE Z *****");
@@ -83,6 +84,7 @@ public class SimpleHingeInteractable : XRSimpleInteractable
     {
         ChangeLayerMask(Default_Layer);
     }
+    protected abstract void ResetHinge();
 
      private void ChangeLayerMask(string mask)
     {
