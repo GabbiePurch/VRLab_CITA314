@@ -43674,8 +43674,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93007cc46d2abf74187b1776dd1aeb58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  columns: 2
+  rows: 4
   wallCubePrefab: {fileID: 6791643372939464239, guid: b3daaffdf342e584fa5a29bddab38e47, type: 3}
   socketWallPrefab: {fileID: 4383233796595609331, guid: c06c915db2b4e554aae83df41081c15e, type: 3}
+  socketPosition: 1
   wallSocket: {fileID: 0}
   wallCubes: []
   cubeSpacing: 0.005
@@ -43688,7 +43691,7 @@ Transform:
   m_GameObject: {fileID: 1601215273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.98399997, y: 0.6, z: -2.1899996}
+  m_LocalPosition: {x: 0.48, y: 0.6, z: -2.1899996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
