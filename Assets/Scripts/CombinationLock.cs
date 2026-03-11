@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using UnityEngine.UI;
-using Cinemachine;
 using UnityEngine.Events;
 
 public class CombinationLock : MonoBehaviour
@@ -17,14 +13,14 @@ public class CombinationLock : MonoBehaviour
     [SerializeField] TMP_Text userInputText;
     [SerializeField] XRButtonInteractable[] comboButtons;
     [SerializeField] TMP_Text infoText;
-    private const string startString = "Enter 3 Digit Combo";
-    private const string resetString = "Enter 3 Digits To Reset Combo";
+    private const string StartString = "Enter 3 Digit Combo";
+    private const string Reset_String = "Enter 3 Digits To Reset Combo";
     [SerializeField] Image lockedPanel;
     [SerializeField] Color unlockedColor;
     [SerializeField] Color lockedColor;
     [SerializeField] TMP_Text lockedText;
-    private const string unlockedString = "Unlocked";
-    private const string lockedString = "Locked";
+    private const string Unlocked_String = "Unlocked";
+    private const string Locked_String = "Locked";
     [SerializeField] bool isLocked;
     [SerializeField] bool isResettable;
     private bool resetCombo;
@@ -113,7 +109,7 @@ public class CombinationLock : MonoBehaviour
         isLocked = false;
         OnUnlock();
         lockedPanel.color = unlockedColor;
-        lockedText.text = unlockedString;
+        lockedText.text = Unlocked_String;
         if (isResettable)
         {
             ResetCombo();
@@ -125,8 +121,8 @@ public class CombinationLock : MonoBehaviour
         isLocked = true;
         OnLock();
         lockedPanel.color = lockedColor;
-        lockedText.text = lockedString;
-        infoText.text = startString;
+        lockedText.text = Locked_String;
+        infoText.text = StartString;
         for (int i = 0; i < maxButtonPresses; i++)
         {
             comboValues[i] = inputValues[i];
@@ -137,7 +133,7 @@ public class CombinationLock : MonoBehaviour
 
     private void ResetCombo()
     {
-        infoText.text = resetString;
+        infoText.text = Reset_String;
         ResetUserValues();
         resetCombo = true;
     }
