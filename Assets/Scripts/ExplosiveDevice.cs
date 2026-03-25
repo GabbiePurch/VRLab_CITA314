@@ -12,7 +12,7 @@ public class ExplosiveDevice : XRGrabInteractable
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         base.OnSelectEntered(args);
-        if(args.interactableObject.transform
+        if(args.interactorObject.transform
         .GetComponent<XRSocketInteractor>() != null)
         {
             isActivated = true;
@@ -21,6 +21,7 @@ public class ExplosiveDevice : XRGrabInteractable
 
     private void OnCollisionEnter(Collision other)
     {
+
         if (isActivated &&
             other.gameObject.GetComponent<WandProjectile>() != null)
         {
