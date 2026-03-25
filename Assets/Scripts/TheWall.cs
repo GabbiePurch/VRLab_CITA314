@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.Events;
 
 [ExecuteAlways]
 public class TheWall : MonoBehaviour
 {
+    public UnityEvent OnDestroy;
     [SerializeField] int columns;
     [SerializeField] int rows;
     [SerializeField] GameObject wallCubePrefab;
@@ -138,6 +140,7 @@ public class TheWall : MonoBehaviour
                 generatedColumns[i].DestroyColumn(power);
             }
         }
+        OnDestroy?.Invoke();
     }
 
     void Update()
