@@ -13,6 +13,7 @@ public class TheWall : MonoBehaviour
     [SerializeField] GameObject socketWallPrefab;
     [SerializeField] int socketPosition = 1;
     [SerializeField] XRSocketInteractor wallSocket;
+    [SerializeField] ExplosiveDevice explosiveDevice;
     [SerializeField] List<GeneratedColumn> generatedColumns;
     GameObject[] wallCubes;
     [SerializeField] float cubeSpacing = 0.005f;
@@ -28,6 +29,11 @@ public class TheWall : MonoBehaviour
         {
             wallSocket.selectEntered.AddListener(OnSocketEntered);
             wallSocket.selectExited.AddListener(OnSocketExited);
+        }
+
+        if(explosiveDevice != null)
+        {
+            explosiveDevice.OnDetonated.AddListener(OnDestroyWall);
         }
     }
 
@@ -133,6 +139,17 @@ public class TheWall : MonoBehaviour
     private void OnSocketEntered(SelectEnterEventArgs arg0)
     {
         if (generatedColumns.Count >= 1)
+        {
+            for (int i = 0; i < generatedColumns.Count; i++)
+            {
+                generatedColumns[i].ActivateColumn();
+            }
+        }
+    }
+
+    private void OnDestroyWall()
+    {
+         if (generatedColumns.Count >= 1)
         {
             for (int i = 0; i < generatedColumns.Count; i++)
             {
@@ -252,6 +269,18 @@ public class GeneratedColumn
                 rb.constraints = RigidbodyConstraints.None;
                 wallCubes[i].transform.SetParent(parentObject);
                 rb.AddRelativeForce(Random.onUnitSphere * power);
+            }
+        }
+    }
+
+    public void ActivateColumn()
+    {
+        for (int i = 0; i < wallCubes.Length; i++)
+        {
+            if (wallCubes[i] != null)
+            {
+                Rigidbody rb = wallCubes[i].GetComponent<Rigidbody>();
+                rb.isKinematic = false;
             }
         }
     }
