@@ -1316,6 +1316,9 @@ MonoBehaviour:
   isResettable: 1
   comboValues: 080000000100000007000000
   inputValues: 
+  lockComboClip: {fileID: 8300000, guid: a7d20e9f23bd7cc449823e482e098902, type: 3}
+  unlockComboClip: {fileID: 8300000, guid: dff3014fa4e23374685962fafb39949f, type: 3}
+  comboButtonPressedClip: {fileID: 8300000, guid: 256bdb10da09c744f86381dce72934e6, type: 3}
 --- !u!222 &52988887
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1386,6 +1389,11 @@ MonoBehaviour:
   - {fileID: 8471264456921800386}
   cabinetDoorSound: []
   cabinetDoorMoveClip: {fileID: 0}
+  comboLock: {fileID: 52988886}
+  comboLockSound: {fileID: 0}
+  lockComboClip: {fileID: 0}
+  unlockComboClip: {fileID: 0}
+  comboButtonPressedClip: {fileID: 0}
   wall: {fileID: 1601215274}
   wallSocket: {fileID: 0}
   wallSound: {fileID: 0}
