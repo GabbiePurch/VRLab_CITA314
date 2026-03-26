@@ -13,6 +13,7 @@ public class TheWall : MonoBehaviour
     [SerializeField] GameObject socketWallPrefab;
     [SerializeField] int socketPosition = 1;
     [SerializeField] XRSocketInteractor wallSocket;
+    public XRSocketInteractor getWallSocket => wallSocket;
     [SerializeField] ExplosiveDevice explosiveDevice;
     [SerializeField] List<GeneratedColumn> generatedColumns;
     GameObject[] wallCubes;
@@ -25,6 +26,8 @@ public class TheWall : MonoBehaviour
     [SerializeField] int maxPower;
     [SerializeField] AudioClip destroyWallClip;
     public AudioClip getDestroyClip => destroyWallClip;
+    [SerializeField] AudioClip socketClip;
+    public AudioClip getSocketClip => socketClip;
     void Start()
     {
         if (wallSocket != null)

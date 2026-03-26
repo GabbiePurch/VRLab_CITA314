@@ -7,12 +7,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class DrawerIneractable : XRGrabInteractable
 {
     [SerializeField] XRSocketInteractor keySocket;
+    public XRSocketInteractor getKeySocket => keySocket;
     [SerializeField] GameObject keyIndicatorLight;
     [SerializeField] bool isLocked;
     [SerializeField] Transform drawerTransform;
     [SerializeField] private Vector3 limitDistances = new Vector3(.02f, .02f, 0f);
     [SerializeField] AudioClip drawerMoveClip;
     public AudioClip GetDrawerMoveClip => drawerMoveClip;
+    [SerializeField] AudioClip socketedClip;
+    public AudioClip getSocketedClip => socketedClip;
 
     private Transform parentTransform;
     private const string Default_Layer = "Default";
