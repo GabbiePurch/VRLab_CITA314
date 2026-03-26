@@ -24,6 +24,12 @@ public class XrAudioManager : MonoBehaviour
     [SerializeField] AudioClip drawerMoveClip;
     [SerializeField] AudioClip drawerSocketClip;
 
+    [Header("Hinge Interactables")]
+    [SerializeField] SimpleHingeInteractable[] cabinetDoors = 
+        new SimpleHingeInteractable[2];
+    [SerializeField] AudioSource[] cabinetDoorSound;
+    [SerializeField] AudioClip cabinetDoorMoveClip;
+
     [Header("The Wall")]
     [SerializeField] TheWall wall;
     [SerializeField] XRSocketInteractor wallSocket;
@@ -46,6 +52,16 @@ public class XrAudioManager : MonoBehaviour
         if (drawer != null)
         {
             SetDrawerInteractable();
+        }
+
+        cabinetDoorSound = new AudioSource[cabinetDoors.Length];
+
+        for (int i = 0; i < cabinetDoors.Length; i++)
+        {
+            if (cabinetDoors[i] != null)
+            {
+                SetCabinetDoors(i);
+            }
         }
 
         if (wall != null)
@@ -89,6 +105,39 @@ public class XrAudioManager : MonoBehaviour
     private void OnDrawerSocketed(SelectEnterEventArgs arg0)
     {
         drawerSocketSound.Play();
+    }
+
+    private void SetCabinetDoors(int index)
+    {
+        cabinetDoorSound[index] = cabinetDoors[index].transform
+        .AddComponent<AudioSource>();
+        cabinetDoorMoveClip = cabinetDoors[index].getHingeMoveClip;
+        CheckClip(ref cabinetDoorMoveClip);
+        cabinetDoorSound[index].clip = cabinetDoorMoveClip;
+        cabinetDoors[index].onHingeSelected.AddListener(OnDoorMove);
+        cabinetDoors[index].selectExited.AddListener(OnDoorStop);
+    }
+
+    private void OnDoorStop(SelectExitEventArgs arg0)
+    {
+        for (int i = 0; i < cabinetDoors.Length; i++)
+        {
+            if (arg0.interactableObject == cabinetDoors[i])
+            {
+                cabinetDoorSound[i].Stop();
+            }
+        }
+    }
+
+    private void OnDoorMove(SimpleHingeInteractable arg0)
+    {
+        for (int i = 0; i < cabinetDoors.Length; i++)
+        {
+            if(arg0 == cabinetDoors[i])
+            {
+                cabinetDoorSound[i].Play();
+            }
+        }
     }
 
     private void SetWall()
