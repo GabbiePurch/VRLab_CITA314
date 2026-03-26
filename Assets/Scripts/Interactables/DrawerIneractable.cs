@@ -11,6 +11,8 @@ public class DrawerIneractable : XRGrabInteractable
     [SerializeField] bool isLocked;
     [SerializeField] Transform drawerTransform;
     [SerializeField] private Vector3 limitDistances = new Vector3(.02f, .02f, 0f);
+    [SerializeField] AudioClip drawerMoveClip;
+    public AudioClip GetDrawerMoveClip => drawerMoveClip;
 
     private Transform parentTransform;
     private const string Default_Layer = "Default";
