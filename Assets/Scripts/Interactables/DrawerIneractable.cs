@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.Events;
 
 public class DrawerIneractable : XRGrabInteractable
 {
+    public UnityEvent OnDrawerDetach;
     [SerializeField] XRSocketInteractor keySocket;
     public XRSocketInteractor getKeySocket => keySocket;
     [SerializeField] XRPhysicsButtonInteractable physicsButton;
+    public XRPhysicsButtonInteractable GetPhysicsButton => physicsButton;
     [SerializeField] GameObject keyIndicatorLight;
     [SerializeField] bool isLocked;
     [SerializeField] bool isDetachable;
@@ -153,6 +156,7 @@ public class DrawerIneractable : XRGrabInteractable
     {
         isDetached = true;
         drawerTransform.SetParent(this.transform);
+        OnDrawerDetach?.Invoke();
     }
 
     private void ChangeLayerMask(string mask)
