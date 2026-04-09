@@ -23,6 +23,7 @@ public class DrawerIneractable : XRGrabInteractable
     public AudioClip GetDrawerMoveClip => drawerMoveClip;
     [SerializeField] AudioClip socketedClip;
     public AudioClip getSocketedClip => socketedClip;
+    private Rigidbody rb;
 
     private Transform parentTransform;
     private const string Default_Layer = "Default";
@@ -32,6 +33,7 @@ public class DrawerIneractable : XRGrabInteractable
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         if (keySocket != null)
         {
             keySocket.selectEntered.AddListener(OnDrawerUnlocked);
@@ -40,7 +42,7 @@ public class DrawerIneractable : XRGrabInteractable
         parentTransform = transform.parent.transform;
         limitPositions = drawerTransform.localPosition;
 
-        if(physicsButton != null)
+        if (physicsButton != null)
         {
             physicsButton.OnBaseEnter.AddListener(OnIsDetachable);
             physicsButton.OnBaseExit.AddListener(OnIsNotDetachable);
@@ -107,9 +109,18 @@ public class DrawerIneractable : XRGrabInteractable
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         base.OnSelectExited(args);
-        ChangeLayerMask(Grab_Layer);
-        isGrabbed = false;
-        transform.localPosition = drawerTransform.localPosition;
+        if (!isDetached)
+        {
+            ChangeLayerMask(Grab_Layer);
+            isGrabbed = false;
+            transform.localPosition = drawerTransform.localPosition;
+        }
+
+        else
+        {
+            rb.isKinematic = false;
+        }
+
     }
 
     private void CheckLimits()

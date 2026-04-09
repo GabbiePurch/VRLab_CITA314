@@ -26,6 +26,7 @@ public class XrAudioManager : MonoBehaviour
     [SerializeField] DrawerIneractable drawer;
     XRSocketInteractor drawerSocket;
     XRPhysicsButtonInteractable drawerPhysicsButton;
+    private bool isDetached;
     AudioSource drawerSound;
     AudioSource drawerSocketSound;
     AudioClip drawerMoveClip;
@@ -275,6 +276,7 @@ public class XrAudioManager : MonoBehaviour
 
     private void OnDoorMove(SimpleHingeInteractable arg0)
     {
+
         for (int i = 0; i < cabinetDoors.Length; i++)
         {
             if (arg0 == cabinetDoors[i])
@@ -286,6 +288,7 @@ public class XrAudioManager : MonoBehaviour
 
     private void OnDrawerDetach()
     {
+        isDetached = true;
         drawerSound.Stop();
     }
 
@@ -344,7 +347,15 @@ public class XrAudioManager : MonoBehaviour
 
     private void OnDrawerMove(SelectEnterEventArgs arg0)
     {
-        drawerSound.Play();
+        if (isDetached)
+        {
+            PlayGrabSound();
+        }
+
+        else
+        {
+            drawerSound.Play();
+        }
     }
 
     private void OnActivatedGrabbable(ActivateEventArgs arg0)
@@ -365,8 +376,7 @@ public class XrAudioManager : MonoBehaviour
 
     private void OnSelectExitGrabbable(SelectExitEventArgs arg0)
     {
-        grabSound.clip = grabClip;
-        grabSound.Play();
+        PlayGrabSound();
     }
 
     private void OnSelectEnterGrabbable(SelectEnterEventArgs arg0)
@@ -390,6 +400,12 @@ public class XrAudioManager : MonoBehaviour
         {
             wallSound.Play();
         }
+    }
+
+    private void PlayGrabSound()
+    {
+        grabSound.clip = grabClip;
+        grabSound.Play();
     }
 
 }
