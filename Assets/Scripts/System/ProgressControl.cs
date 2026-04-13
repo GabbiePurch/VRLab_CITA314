@@ -26,11 +26,15 @@ public class ProgressControl : MonoBehaviour
     XRSocketInteractor wallSocket;
     [SerializeField] GameObject teleportationAreas;
 
+    [Header("Library")]
+    [SerializeField] SimpleSlideControl librarySlider;
+
     [Header("Challenge Settings")]
     [SerializeField] string startGameString;
     [SerializeField] string[] challengeStrings;
     private bool startGameBool;
     private int challengeNumber;
+
     void Start()
     {
         if (startButton != null)
@@ -46,10 +50,20 @@ public class ProgressControl : MonoBehaviour
             comboLock.UnlockAction += OnComboUnlocked;
         }
 
-        if (wall != wall)
+        if (wall != null)
         {
             SetWall();
         }
+
+        if (librarySlider != null)
+        {
+            librarySlider.OnSliderActive.AddListener(LibrarySliderActivate);
+        }
+    }
+
+    private void LibrarySliderActivate()
+    {
+        ChallengeComplete();
     }
 
     private void ChallengeComplete()
