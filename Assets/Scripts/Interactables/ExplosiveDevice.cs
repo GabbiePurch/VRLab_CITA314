@@ -16,6 +16,7 @@ public class ExplosiveDevice : XRGrabInteractable
         .GetComponent<XRSocketInteractor>() != null)
         {
             isActivated = true;
+            Debug.Log("******* IS ACTIVATED ***********");
         }
     }
 
@@ -25,6 +26,7 @@ public class ExplosiveDevice : XRGrabInteractable
         if (isActivated &&
             other.gameObject.GetComponent<WandProjectile>() != null)
         {
+            Debug.Log("****** HIT ************");
             OnDetonated?.Invoke();
         }
     }

@@ -38,6 +38,7 @@ public class TheWall : MonoBehaviour
 
         if(explosiveDevice != null)
         {
+            Debug.Log("******** HIT THE LISTENER ***********");
             explosiveDevice.OnDetonated.AddListener(OnDestroyWall);
         }
     }
@@ -154,12 +155,14 @@ public class TheWall : MonoBehaviour
 
     private void OnDestroyWall()
     {
+        Debug.Log("********** ON DESTROY WALL ************");
          if (generatedColumns.Count >= 1)
         {
             for (int i = 0; i < generatedColumns.Count; i++)
             {
                 int power = Random.Range(maxPower / 2, maxPower);
                 generatedColumns[i].DestroyColumn(power);
+                Debug.Log("******* DESTROYING THE COLUMNS ************");
             }
         }
         OnDestroy?.Invoke();
