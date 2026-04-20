@@ -54,6 +54,12 @@ public class XrAudioManager : MonoBehaviour
     AudioClip destroyWallClip;
     AudioClip wallSocketedClip;
 
+    [Header("Joystick Interactable")]
+    [SerializeField] SimpleHingeInteractable joystick;
+    private AudioSource joystickSound;
+    private AudioClip joystickClip;
+
+
     [Header("Local Audio Settings")]
     [SerializeField] AudioSource backgroundMusic;
     [SerializeField] private AudioClip backgroundMusicClip;
@@ -100,6 +106,32 @@ public class XrAudioManager : MonoBehaviour
         {
             SetWall();
         }
+
+        if (joystick != null)
+        {
+            SetJoystick();
+        }
+    }
+
+    private void SetJoystick()
+    {
+        joystickClip = joystick.getHingeMoveClip;
+        joystickSound = joystick.transform.AddComponent<AudioSource>();
+        joystickSound.clip = joystickClip;
+        joystickSound.loop = true;
+        joystick.onHingeSelected.AddListener(JoystickMove);
+        joystick.selectExited.AddListener(JoystickExited);
+
+    }
+
+    private void JoystickExited(SelectExitEventArgs arg0)
+    {
+        joystickSound.Stop();
+    }
+
+    private void JoystickMove(SimpleHingeInteractable arg0)
+    {
+        joystickSound.Play();
     }
 
     private void OnDisable()

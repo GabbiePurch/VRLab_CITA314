@@ -1548,6 +1548,7 @@ MonoBehaviour:
   comboLock: {fileID: 52988886}
   wall: {fileID: 1601215274}
   wallSound: {fileID: 0}
+  joystick: {fileID: 854647907}
   backgroundMusic: {fileID: 158713861}
   backgroundMusicClip: {fileID: 8300000, guid: 05e7b4c0f2b9bc947841b51337f4d5b9, type: 3}
 --- !u!1001 &57253046
@@ -16317,6 +16318,7 @@ MonoBehaviour:
   - Pick Up Explosive Device and Insert it Into the Correct Wall Socket
   - Find Wand and Fire Projectile at Explosive Device to Destroy The Wall
   - Enter the Library and Use The Slider to Activate The Lights
+  - Find The JoyStick to Control The Robot To Destroy The Wall Cubes
 --- !u!4 &499206297
 Transform:
   m_ObjectHideFlags: 0
